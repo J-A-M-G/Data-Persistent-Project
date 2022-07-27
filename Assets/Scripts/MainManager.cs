@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainManager : MonoBehaviour
 {
@@ -12,12 +13,15 @@ public class MainManager : MonoBehaviour
 
     public Text ScoreText;
     public GameObject GameOverText;
+    public Text bestScoreText;
     
     private bool m_Started = false;
     private int m_Points;
+    private int highScore;
     
     private bool m_GameOver = false;
 
+    public TextMeshProUGUI playerName;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +40,9 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        playerName.text = "Hello " + UIMainManager.Instance.playerName;
+        bestScoreText.text = "High Score: " + UIMainManager.Instance.highScorePlayerName + ": " + UIMainManager.Instance.highScore;
     }
 
     private void Update()
@@ -60,6 +67,13 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+
+        if (m_Points > UIMainManager.Instance.highScore)
+        {
+            UIMainManager.Instance.highScorePlayerName = UIMainManager.Instance.playerName;
+            UIMainManager.Instance.highScore = m_Points;
+            bestScoreText.text = "High Score: " + UIMainManager.Instance.playerName + ": " + UIMainManager.Instance.highScore;           
+        }
     }
 
     void AddPoint(int point)
@@ -71,6 +85,12 @@ public class MainManager : MonoBehaviour
     public void GameOver()
     {
         m_GameOver = true;
-        GameOverText.SetActive(true);
+        GameOverText.SetActive(true);        
     }
+
+    public void ExitGameFromMain()
+    {
+        UIMainManager.Instance.ExitGame();
+    }
+
 }
