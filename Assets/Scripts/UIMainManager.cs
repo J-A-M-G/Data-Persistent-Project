@@ -16,7 +16,9 @@ public class UIMainManager : MonoBehaviour
     public InputField playerNameField;
     public TextMeshProUGUI playerNameDisplay;
     public GameObject welcomeText;
-    
+    public GameObject startMenuDisplay;
+    public Button closeHighScoreTextButton;
+    public Button resetHighScoreButton;
     public TextMeshProUGUI highScoreText;
 
     public static UIMainManager Instance;
@@ -38,6 +40,21 @@ public class UIMainManager : MonoBehaviour
         highScoreText.text = "HIGH SCORE\n" + highScorePlayerName + ": " + highScore;
     }
 
+    public void ShowHighScores()
+    {
+        highScoreText.enabled = true;
+        startMenuDisplay.SetActive(false);
+        resetHighScoreButton.gameObject.SetActive(true);
+        closeHighScoreTextButton.gameObject.SetActive(true);
+    }
+
+    public void HideHighScores()
+    {
+        highScoreText.enabled = false;
+        startMenuDisplay.SetActive(true);
+        resetHighScoreButton.gameObject.SetActive(false);
+        closeHighScoreTextButton.gameObject.SetActive(false);
+    }
     public void StorePlayerName()
     {
         welcomeText.SetActive(true);
@@ -67,7 +84,7 @@ Application.Quit();
     public void ResetHighScore()
     {
         highScore = 0;
-        highScorePlayerName = "";
+        highScorePlayerName = "You Soon!";
         highScoreText.text = "HIGH SCORE\n" + highScorePlayerName + ": " + highScore;
     }
 

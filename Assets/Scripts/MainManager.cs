@@ -68,6 +68,7 @@ public class MainManager : MonoBehaviour
             }
         }
 
+        //Compare current score to highScore and replace if higher
         if (m_Points > UIMainManager.Instance.highScore)
         {
             UIMainManager.Instance.highScorePlayerName = UIMainManager.Instance.playerName;
