@@ -59,7 +59,7 @@ public class UIMainManager : MonoBehaviour
     {
         welcomeText.SetActive(true);
         playerName = playerNameField.text;
-        playerNameDisplay.text = "Welcome " + playerName;
+        playerNameDisplay.text = "Welcome " + playerName + "!!";
        
         Debug.Log(playerName);
     }
